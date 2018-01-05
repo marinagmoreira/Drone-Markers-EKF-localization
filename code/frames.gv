@@ -1,0 +1,17 @@
+digraph G {
+"world" -> "ar_marker_5"[label="Broadcaster: /tf_broadcaster\nAverage rate: 3611.121 Hz\nMost recent transform: 1510174149.459 ( 0.002 sec old)\nBuffer length: 4.988 sec\n"];
+"crazyflie1" -> "crazyflie/base_link"[label="Broadcaster: /player\nAverage rate: 10.703 Hz\nMost recent transform: 1509030687.610 ( 1143461.850 sec old)\nBuffer length: 1.401 sec\n"];
+"world" -> "crazyflie"[label="Broadcaster: /player\nAverage rate: 59.557 Hz\nMost recent transform: 1509030687.587 ( 1143461.874 sec old)\nBuffer length: 1.360 sec\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1510174149.461"[ shape=plaintext ] ;
+ }->"world";
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1510174149.461"[ shape=plaintext ] ;
+ }->"crazyflie1";
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1510174149.461"[ shape=plaintext ] ;
+ }->"usb_cam";
+}

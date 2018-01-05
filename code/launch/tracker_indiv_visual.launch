@@ -1,0 +1,25 @@
+<launch>
+
+	<arg name="marker_size" default="5" />
+	<arg name="max_new_marker_error" default="0.08" />
+	<arg name="max_track_error" default="0.08" />
+
+	<arg name="cam_image_topic" default="/camera/image_raw" />
+	<arg name="cam_info_topic" default="/camera/camera_info" />
+	<arg name="output_frame" default="/usb_cam" />
+	
+
+	<rosparam param="use_sim_time">true</rosparam>
+
+
+	<node pkg="marina" type="kalman.py" 
+		name="kalman" />
+
+	<node pkg="marina" type="visio.py" 
+		name="visio" />
+
+	<node name="rviz" type="rviz" pkg="rviz" args="-d /home/marina/ros_ws/src/marina/rviz/config.rviz"/>
+
+	<node pkg="rosbag" type="play" name="player" output="screen" args="--clock -r 0.3 -l /media/marina/D4E23A42E23A28DE/ROS/1.bag"/>>
+
+</launch>

@@ -1,0 +1,41 @@
+<launch>
+
+	<arg name="marker_size" default="5" />
+	<arg name="max_new_marker_error" default="0.08" />
+	<arg name="max_track_error" default="0.08" />
+
+	<arg name="cam_image_topic" default="/camera/image_raw" />
+	<arg name="cam_info_topic" default="/camera/camera_info" />
+	<arg name="output_frame" default="/usb_cam" />
+	
+
+	<rosparam param="use_sim_time">true</rosparam>
+
+
+	<node pkg="marina" type="fixed_tf_world_broadcaster.py" 
+		name="broadcaster_origin" />
+
+	<node pkg="marina" type="fixed_tf_marker_broadcaster.py" 
+		name="broadcaster_markers" />	
+
+	<node pkg="marina" type="tf_inv_alvar.py" 
+		name="inverse_alvar" />
+
+	<!--node pkg="marina" type="kalman.py" 
+		name="kalman" /-->
+
+	<node name="ar_track_alvar" pkg="ar_track_alvar" type="individualMarkersNoKinect" respawn="true" output="screen">
+		<param name="marker_size"           type="double" value="$(arg marker_size)" />
+		<param name="max_new_marker_error"  type="double" value="$(arg max_new_marker_error)" />
+		<param name="max_track_error"       type="double" value="$(arg max_track_error)" />
+		<param name="output_frame"          type="string" value="$(arg output_frame)" />
+
+		<remap from="camera_image"  to="$(arg cam_image_topic)" />
+		<remap from="camera_info"   to="$(arg cam_info_topic)" />
+	</node>
+
+	<node name="rviz" type="rviz" pkg="rviz"/>
+
+	<node pkg="rosbag" type="play" name="player" output="screen" args="--clock -r 0.3 -l /media/marina/D4E23A42E23A28DE/ROS/Dados/tags_2nd.bag"/>>
+
+</launch>

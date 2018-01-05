@@ -1,0 +1,2 @@
+float32 error_pos
+float32 error_att

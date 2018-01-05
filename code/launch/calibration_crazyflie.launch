@@ -1,0 +1,19 @@
+<launch>
+	<arg name="size" default="9x7" />
+	<arg name="square" default="0.03" />
+
+
+	<arg name="image" default="/camera/image_raw" />
+	<arg name="camera" default="/camera" />
+
+	
+
+	<node pkg="rosbag" type="play" name="player" output="screen" args="--clock -l /media/marina/D4E23A42E23A28DE/ROS/Dados/calibration.bag"/>
+
+
+
+	<node name="camera_calibration" pkg="camera_calibration" type="cameracalibrator.py" args= "	--size 9x7 --square 0.03 --no-service-check image:=/camera/image_raw camera:=/camera"
+	/>
+
+
+</launch>
